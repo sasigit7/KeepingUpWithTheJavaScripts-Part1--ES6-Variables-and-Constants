@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2019 by sasigit7 (http://jsbin.com/vepisuk/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+</head>
+<body>
+
+<script id="jsbin-javascript">
+// Keeping Up With JavaScripts- Part1: ES6 @HomeWork Assignment#2: Variables and Constants
+
+// DEFINATION: In programming, a VARIABLE is a container which stores a value such as data or information.
+
+
+/* 
+   Important Points to remember about good old VARIABLES::
+
+   1. VARIABLES are denoted by a keyword "var".
+   2. VARIABLES are created with a descriptive name.
+   3. VARIABLES can be declared without assigning a value @which outputs undefined when logged to the console. 
+   4. VARIABLES are used to store or update information
+   5. VARIABLES are used for reference or "get" information. 
+   6. VARIABLE NAMES cannot start with numbers and are Case Sensitive. 
+   7. VARIABLE NAMES cannot be the same as Reserved Keywords.
+*/
+
+// Up untill now, the only way to declare a variable in JavaScript was to use the keyword VAR. 
+     //   Example using VAR keyword: 
+                var myName = "Sasi"; // Stored a value of "Sasi" in myName variable.
+                console.log(myName); // "Sasi"
+                    myName = "Shashi"; // Updated the myName variable with a new value "Shashi".  
+                console.log(myName); // "Shashi"
+
+                var myAge = 35; // Stored a number value 35 in myAge variable.
+                console.log(myAge); // 35
+
+                var isMarried = true; // Assigned a boolean value true to isMarried variable. 
+                console.log(isMarried); // true
+
+// Introducing the LET keyword, a brand new Variable in ES6 or ES2015. 
+/*   
+   1. Variables declared with LET can be reassigned, but can't be redeclared in the same scope.
+   2. Use LET to declare variables when there is a plan on changing the value of a variable later in the program.
+  */ 
+   // Example using LET keyword:
+          let instructor = "Pirple"; // Declared a LET variable instructor and Assigned a value "Pirple". 
+              instructor = "Pirple.thinkific"; // Reassigned a new value "Pirple.thinkific" without using LET keyword again.
+              console.log(instructor); // "Pirple.thinkific"
+   // Example using LET keyword without assigning a value. 
+          let price; // No value assigned
+          console.log(price); // undefined
+          price = 100; // Value assigned later 
+          console.log(price); // 100
+
+
+// Introducing the CONST keyword, short for CONSTANT, another brand new and powerful Variable in ES6 OR ES2015.
+/*
+  1. Variables declared with CONST must be assigned an initial value, but can't be reassigned and redeclared in the same scope.
+  2. Use CONST when there is NO plan on changing the value of a variable later in the program. 
+  3. Since CONST is the strictest way to declare a variable, it is usually recommended to declare variables with CONST.
+  4. CONST variable makes the code easier to reason about since the identifiers won't change throughout the lifetime of the program.  
+*/
+  // Example using CONST keyword: 
+           const myLocation = "London"; // Once declared with CONST variable, the value can't be reassigned nor redeclared. 
+           console.log(myLocation); // "London"
+
+  /* What happens when CONST variable is used to reassign a new value:
+           const occupation = "developer";
+           console.log(occupation); // "developer"
+                 occupation = "freelancer"; // reassign a new value
+           console.log(occupation); // Throws  an uncaught TypeError: Assignment to constant variable
+   */
+
+   /* What happens when CONST variable is used without assigning a value:
+           const education;
+           console.log(education); // Syntax Error
+   */
+
+
+// Differences between VAR, LET and CONST and their appropriate usages using different use cases:
+
+// In most cases, using VAR should be fine but sometimes it can get us into trouble like in the following example
+     // VAR troubles Example:
+               function getClothing(isCold) {
+                 if (isCold) {
+                   var freezing = "Wear a wool coat";
+                 } else {
+                   var hot = "Wear cotton clothes";
+                   console.log(freezing);
+                 }
+               }
+                 getClothing(false); // undefined
+
+  /* Here, the function getClothing outputs UNDEFINED because of the JavaScript quirk called HOISTING and what the hell was that? 
+     Well, HOISTING is a JavaScript mechanism where variables and function declarations are moved to top of their scope before
+     code execution. Inevitably, this means that no matter where functions and variables are declared, they are moved to the 
+     top of their scope regardless of whether their scope is global or local.  
+     
+     In simple terms, Hoisting is JavaScript's default behaviour of moving declarations to the top.
+     
+     According to the Oxford english dictionary, The word HOISTING means raising, up lifting or elavating etc. 
+  */
+
+// So, at run-time, the above VAR troubles Example will look like this....
+                function getClothing(isCold) {
+                  var freezing, hot; // variables are raised to the top of the function scope at run-time
+                  if (isCold) {
+                    freezing = "Wear a wool coat";
+                  } else {
+                    hot = "Wear cotton clothes";
+                   console.log(freezing);
+                  }
+                }
+                 getClothing(false);  // undefined 
+
+/* In order to combat this problem, smart developers developed new variable declarations namely, LET and CONST in ES6 to eliminate 
+   this specific issue of HOISTING because they are scoped to the block, not to the function. Whereas, when used with VAR keyword, 
+   variables were either scoped globally or locally to an entire function scope. */
+
+// Replacing VAR keyword with LET variable in the above VAR troubles Example
+
+                 function getClothing(isCold) {
+                 if (isCold) {
+                   let freezing = "Wear a wool coat"; 
+                   /* Variable declared with LET keyword will stuck in what is known as 
+                      TEMPORAL DEAD ZONE (TDZ) untill the variable's declaration is processed. */
+                 } else {
+                   let hot = "Wear cotton clothes";
+                   console.log(freezing);
+                 }
+               }
+                 getClothing(false); // Throws a reference error bcuz freezing is not defined anywhere. 
+
+
+// Replacing VAR keyword with CONST variable in the above VAR troubles Example
+
+                 function getClothing(isCold) {
+                 if (isCold) {
+                   const freezing = "Wear a wool coat"; 
+                   } else {
+                   const hot = "Wear cotton clothes";
+                   console.log(freezing);
+                 }
+               }
+                 getClothing(false); // Throws a reference error bcuz freezing is not defined anywhere.  
+
+/* The major difference between using "VAR" and "LET" to declare a variable in JavaScript is Scoping. VAR is scoped to the 
+   nearest function block and LET is scoped to the nearest enclosing block, which can be smaller than a functional block. 
+   Both are global if outside any block. Also, variables declared with LET are not accessible before they are declared in
+   their enclosing block.
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
